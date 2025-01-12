@@ -68,10 +68,10 @@ const Home = ({navigation}: Props) => {
           data: data,
         });
       }}
-      className="flex-row justify-between items-center mb-4">
+      className="flex-row justify-between items-center mb-6">
       <Text className="text-black text-[18px]">{data.transferName}</Text>
 
-      <View className="flex-row justify-between items-center mb-4">
+      <View className="flex-row justify-between items-center">
         <Text
           className="text-black text-[16px] font-semibold mr-4"
           style={{
@@ -118,7 +118,7 @@ const Home = ({navigation}: Props) => {
           <Text className="text-black font-bold text-[18px] mb-6">
             Latest Transactions
           </Text>
-          <View style={{width: '100%', height: 240}}>
+          <View style={{width: '100%', height: 200}}>
             <FlashList
               bounces={false}
               data={response.data ? response.data : []}
