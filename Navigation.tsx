@@ -1,17 +1,29 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import Login from './screens/Login';
 import Home from './screens/Home';
+
+import useStore from './global/zustand';
 
 const Stack = createNativeStackNavigator();
 
 function RootStack() {
+  const {isLoggedIn} = useStore((state: any) => state);
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+      {isLoggedIn ? (
+        <Stack.Group>
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Group>
+      ) : (
+        <Stack.Group>
+          <Stack.Screen name="Login" component={Login} />
+        </Stack.Group>
+      )}
     </Stack.Navigator>
   );
 }
