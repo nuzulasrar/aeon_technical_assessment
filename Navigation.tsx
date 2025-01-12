@@ -1,20 +1,20 @@
 // In App.js in a new project
 
-import * as React from 'react';
+import * as React from 'react'
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Login from './screens/Login';
-import Home from './screens/Home';
+import Login from './screens/Login'
+import Home from './screens/Home'
 
-import useStore from './global/zustand';
+import useStore from './global/zustand'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 function RootStack() {
-  const {isLoggedIn} = useStore((state: any) => state);
+  const { isLoggedIn } = useStore((state: any) => state)
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isLoggedIn ? (
         <Stack.Group>
           <Stack.Screen name="Home" component={Home} />
@@ -25,9 +25,9 @@ function RootStack() {
         </Stack.Group>
       )}
     </Stack.Navigator>
-  );
+  )
 }
 
 export default function App() {
-  return <RootStack />;
+  return <RootStack />
 }
