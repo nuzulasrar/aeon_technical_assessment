@@ -5,7 +5,10 @@ import {ItemProps} from './Home';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../Navigation';
+import Share from 'react-native-share';
+
 type Props = NativeStackScreenProps<RootStackParamList, 'TransactionDetails'>;
+
 const TransactionDetails = ({route, navigation}: Props) => {
   const insets = useSafeAreaInsets();
   const {data}: any = route.params;
@@ -26,6 +29,28 @@ const TransactionDetails = ({route, navigation}: Props) => {
 
     return `${hours}:${minutes}:${seconds} ${period} ${day}/${month}/${year}`;
   }
+
+  const options = {
+    title: `Transaction Details`,
+    message: `AEON Transaction Details \n
+    Reference ID: ${data.refId} \n 
+    Recipient's Name: ${formatUTCDate(data.transferDate)} \n 
+    Reference ID: ${data.recipientName} \n 
+    Transfer Name: ${data.transferName} \n 
+    Amount: ${data.amount.toFixed()} \n
+    `,
+    url: `https://www.examplebank.com.my/transaction/${data.refId}`,
+  };
+
+  const ShareDetails = () => {
+    Share.open(options)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        err && console.log(err);
+      });
+  };
 
   return (
     <View
@@ -98,6 +123,16 @@ const TransactionDetails = ({route, navigation}: Props) => {
             </View>
           </View>
         </View>
+
+        <TouchableOpacity
+          onPress={() => {
+            ShareDetails();
+          }}
+          className="w-full bg-white rounded-full px-6 py-4">
+          <Text className="text-black font-[400] text-[20px] text-center">
+            Share
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
