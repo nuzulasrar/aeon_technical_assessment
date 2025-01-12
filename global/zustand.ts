@@ -5,3 +5,5 @@ const useStore = create(set => ({
   updateIsLoggedIn: (newIsLoggedIn: boolean) =>
     set({isLoggedIn: newIsLoggedIn}),
 }));
+
+export default useStore;
